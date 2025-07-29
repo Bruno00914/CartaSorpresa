@@ -1,149 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mi Carta para Ti</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
     body {
       font-family: 'Arial', sans-serif;
       background-color: #ffe6e6;
       margin: 0;
       padding: 0;
       text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
+
     .container {
-      margin: 20px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin: 40px auto;
+      padding: 30px 40px;
+      background: linear-gradient(135deg, #fff0f6 0%, #fff6fa 100%);
+      border-radius: 40px 20px 40px 20px;
       max-width: 600px;
-      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(255, 102, 178, 0.25);
       position: relative;
-      overflow: hidden;
-    }
-    h1 {
-      color: #ff66b2;
-      font-size: 36px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #333;
-      font-size: 18px;
-      line-height: 1.6;
-      text-align: left;
-      display: none;
-      margin-top: 20px;
-    }
-    .corazon {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background-color: red;
-      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
-      margin: 10px auto;
-      animation: float 5s ease-in infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
-    }
-
-    .footer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #888;
-    }
-
-    .letter {
-      position: relative;
-      padding: 20px;
-      background-color: #fff;
-      border: 2px solid #ff66b2;
-      border-radius: 10px;
-      max-width: 500px;
-      margin: 20px auto;
       cursor: pointer;
-      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .container:hover {
+      box-shadow: 0 12px 40px rgba(255, 102, 178, 0.4);
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #ff66b2;
+      font-size: 42px;
+      margin-bottom: 25px;
+      user-select: none;
+    }
+
+    .letter-instruction {
+      font-size: 20px;
+      color: #c6487e;
+      user-select: none;
+      margin-bottom: 15px;
     }
 
     .letter-content {
       display: none;
-      animation: slideIn 1s ease forwards;
-      padding: 10px;
+      text-align: left;
+      color: #4a4a4a;
       font-size: 18px;
-      color: #333;
       line-height: 1.8;
+      user-select: text;
+      white-space: pre-line;
+      font-weight: 500;
     }
 
-    @keyframes slideIn {
-      from {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    .letter-content p {
+      margin: 15px 0;
     }
 
-    /* Animación para corazones flotantes */
+    /* Corazones SVG flotantes contenedor */
     .corazon {
-      position: absolute;
+      position: fixed;
+      bottom: -40px;
       width: 30px;
       height: 30px;
-      background-color: red;
-      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
-      margin: 10px auto;
-      animation: float 5s ease-in infinite;
+      animation-name: floatUp;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      opacity: 0.8;
+      fill: #ff4d6d;
+      filter: drop-shadow(0 0 2px #d4003c);
     }
 
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-40px) scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-80vh) scale(0.9);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <h1>Mi Carta para jeni linda 💗</h1>
 
-  <div class="container">
-    <h1>Mi Carta para Ti 💗</h1>
-
-    <!-- Aquí la carta que aparece cuando se hace clic -->
-    <div class="letter" onclick="mostrarCarta()">
-      <p>Haz clic aquí para abrir la carta</p>
-    </div>
-
-    <!-- Contenido de la carta que se muestra después de hacer clic -->
+  <div class="container" onclick="mostrarCarta()" aria-label="Carta de amor. Haz clic para abrirla" role="button" tabindex="0" onkeypress="if(event.key==='Enter'){mostrarCarta()}">
+    <div class="letter-instruction">Haz clic aquí para abrir la carta</div>
     <div class="letter-content" id="letterContent">
-      <p>Mi amor,</p>
-      <p>No tengo palabras suficientes para expresar lo agradecido que estoy por todo lo que haces por mí. Tu amor, tu paciencia, y esa capacidad increíble de soportar mi hiperactividad y mis bromas sin perder la sonrisa son cosas que valoro más de lo que imaginas.</p>
-      <p>Sé que a veces soy un torbellino, y sin embargo, tú siempre estás ahí, calmando mis locuras y dándome tu apoyo incondicional. Me haces sentir tan afortunado, porque no todo el mundo tiene la suerte de encontrar a alguien tan especial como tú.</p>
-      <p>Quiero que sepas que cada gesto, cada palabra, cada momento contigo es un regalo que aprecio profundamente. Todo lo que haces por mí no pasa desapercibido, y lo valoro con todo mi corazón. Eres el faro que ilumina mi vida, la paz en medio de mi caos.</p>
-      <p>Te amo más de lo que las palabras pueden decir, y no importa cuántos días pasen, siempre seguiré agradecido por tenerte a mi lado. Gracias por ser tú, por ser mi apoyo, por tu amor y por hacer mi vida tan hermosa. Te amo con todo mi corazón.</p>
-      <p>Con todo mi amor, <br> [Tu nombre]</p>
+      <p>Quiero tomarme el tiempo para darte las gracias por todo lo que eres y todo lo que significas para mí.<br />
+      Aprecio muchísimo tu paciencia, esa que me das aun cuando no soy perfecto y tengo días complicados.<br />
+      Gracias por entenderme, por no rendirte ante lo complicado que soy y por quedarte a mi lado.</p>
+
+      <p>Tu apoyo ha sido un impulso que me hace mejorar cada día más y querer ser un mejor chico para ti, porque el amor que siento por ti es profundo y verdadero.<br />
+      Sé que no siempre expreso lo mucho que valoro que estés cerca mía, pero cada gesto tuyo me vuelve loco, porque así de enamorado estoy de ti, locamente.</p>
+
+      <p>Gracias por ser ese refugio que siempre quise, ese en el que siempre puedo contar, por escucharme y quererme con tanta sinceridad.<br />
+      Espero que sigamos descubriendo cosas nuevas y maravillosas en nuestro camino, disfrutando de cada momento, de cada risa y hasta de cada problema que tengamos, porque sé que vales la pena.</p>
+
+      <p>Eres muy especial para mí, Jeni, y siempre lo serás, mucho más de lo que te imagines. No dudes nunca del amor que tengo para ti.</p>
+
+      <p style="margin-top: 40px; font-weight: 700; font-size: 20px; color: #ff3399;">Con mucho cariño,<br />de tu nene 💗</p>
     </div>
   </div>
 
-  <!-- Aquí aparecerán los corazones flotando -->
-  <div class="corazon" style="left: 10%; animation-delay: 0s;"></div>
-  <div class="corazon" style="left: 30%; animation-delay: 1s;"></div>
-  <div class="corazon" style="left: 50%; animation-delay: 2s;"></div>
-  <div class="corazon" style="left: 70%; animation-delay: 3s;"></div>
-  <div class="corazon" style="left: 90%; animation-delay: 4s;"></div>
+  <!-- Corazones SVG flotantes -->
+  <svg class="corazon" style="left: 10%; animation-duration: 8s; animation-delay: 0s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
+
+  <svg class="corazon" style="left: 25%; animation-duration: 10s; animation-delay: 2s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
+
+  <svg class="corazon" style="left: 40%; animation-duration: 9s; animation-delay: 4s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
+
+  <svg class="corazon" style="left: 60%; animation-duration: 11s; animation-delay: 1s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
+
+  <svg class="corazon" style="left: 75%; animation-duration: 7s; animation-delay: 3s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
+
+  <svg class="corazon" style="left: 90%; animation-duration: 8s; animation-delay: 5s;" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+    4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76
+    3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+    11.54L12 21.35z" />
+  </svg>
 
   <script>
     function mostrarCarta() {
-      document.getElementById("letterContent").style.display = "block"; // Muestra el contenido de la carta
-      document.querySelector(".letter").style.display = "none"; // Oculta la carta cuando se hace clic
+      const content = document.getElementById('letterContent');
+      const container = content.parentElement;
+      if (content.style.display === 'block') return;
+      content.style.display = 'block';
+      container.querySelector('.letter-instruction').style.display = 'none';
     }
-  </script>
 
+    // Para que también funcione con teclado "Enter"
+    document.querySelector('.container').addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') mostrarCarta();
+    });
+  </script>
 </body>
 </html>
+
 
